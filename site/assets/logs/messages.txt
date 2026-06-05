@@ -1,0 +1,3 @@
+2026-06-04 16:15:11	guest	http://pwdir.local/http404/	Populated initial created/modified dates for 'fld_cover_image' (FieldtypeImage)
+2026-06-04 16:15:11	guest	http://pwdir.local/http404/	Populated initial created/modified dates for 'fld_gallery' (FieldtypeImage)
+2026-06-04 19:13:28	guest	http://pwdir.local/http404/	Deleted field "fld_event_types" data in 0 row(s) from 0 page(s) using template "listing". [page-by-page] (Fields)

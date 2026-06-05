@@ -1,0 +1,127 @@
+@import 'variables.less';
+@import 'mixins.less';
+
+@import 'base/reset.less';
+@import 'base/typography.less';
+@import 'layout/header.less';
+@import 'layout/footer.less';
+
+@import 'components/listing-card.less';
+@import 'components/listing-filters.less';
+@import 'components/listing-hero.less';
+
+body {
+    font-family: @font-family-base;
+    color: @text-dark;
+    background: @bg-light;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.breadcrumb-nav {
+    background: @bg-light;
+    padding: 0.75rem 0;
+    margin-bottom: 0;
+}
+
+.listing-page {
+    min-height: 100vh;
+}
+
+.listing-hero {
+    background: linear-gradient(135deg, @primary 0%, darken(@primary, 15%) 100%);
+    color: @text-light;
+
+    h1 {
+        font-weight: 700;
+    }
+
+    .form-label {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.875rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .form-control,
+    .form-select {
+        border: none;
+        padding: 0.5rem 1rem;
+    }
+}
+
+.listing-results {
+    background: @bg-light;
+}
+
+.listing-detail {
+    min-height: 100vh;
+}
+
+.listing-info {
+    &__description-text {
+        line-height: 1.7;
+        color: @text-dark;
+    }
+
+    &__contact {
+        box-shadow: @listing-card-shadow;
+        border: none;
+        border-radius: @card-radius;
+    }
+}
+
+.listing-features {
+    .listing-feature {
+        font-size: 0.875rem;
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+.listing-gallery {
+    &__main {
+        border-radius: @card-radius;
+        overflow: hidden;
+    }
+
+    &__thumbs {
+        .img-thumbnail {
+            border-radius: @border-radius;
+            transition: opacity 0.2s;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+}
+
+.listing-socials {
+    .btn-outline-secondary {
+    }
+}
+
+.badge {
+    font-weight: 500;
+}
+
+.btn-success {
+    background-color: @success;
+    border-color: @success;
+}
+
+.btn-outline-primary {
+    &:hover {
+        background-color: @primary;
+        color: @text-light;
+    }
+}
+
+@media (max-width: 991px) {
+    .listing-info__contact {
+        position: relative;
+        margin-top: 2rem;
+    }
+}

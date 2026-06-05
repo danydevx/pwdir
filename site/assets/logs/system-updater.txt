@@ -1,0 +1,46 @@
+2026-06-04 14:51:24	Update #8: Completed!
+2026-06-04 14:51:24	Update #9: Initializing update
+2026-06-04 14:51:25	Update #9: Added: Pages > Recent
+2026-06-04 14:51:25	Update #9: Completed!
+2026-06-04 14:51:29	Update #10: Initializing update
+2026-06-04 14:51:30	Update #10: Installed ProcessLogger and added: Setup > Logs
+2026-06-04 14:51:30	Update #10: Installed InputfieldIcon
+2026-06-04 14:51:30	Update #10: Completed!
+2026-06-04 14:51:32	Update #11: Initializing update
+2026-06-04 14:51:32	Update #11: Completed!
+2026-06-04 14:51:32	Update #17: Created: /site/assets/.htaccess
+2026-06-04 14:51:32	WARNING: Update #17: Unable to write updates to '/site/templates/.htaccess', so writing to '/site/assets/cache/site-templates-htaccess.txt' instead, in case you want to copy manually.
+2026-06-04 14:51:32	Update #17: Created: /site/assets/cache/site-templates-htaccess.txt
+2026-06-04 14:51:32	Update #17: Created: /site/modules/.htaccess
+2026-06-04 14:51:32	Update #12: Initializing update
+2026-06-04 14:51:32	Update #12: Added 'published' column to pages table
+2026-06-04 14:51:32	Update #12: Populated values to 'published' for 43 pages
+2026-06-04 14:51:33	Update #12: Completed!
+2026-06-04 14:51:33	Update #13: Initializing update
+2026-06-04 14:51:33	Update #13: Completed!
+2026-06-04 14:51:33	Update #14: Initializing update
+2026-06-04 14:51:33	Update #14: Completed!
+2026-06-04 14:51:33	Update #15: Initializing update
+2026-06-04 14:51:33	Update #15: Completed!
+2026-06-04 14:51:33	Update #16: Initializing update
+2026-06-04 14:51:33	Update #16: Completed!
+2026-06-04 16:05:03	Update #17: Initializing update
+2026-06-04 16:05:03	Update #17: Skipped: /site/.htaccess (already exists)
+2026-06-04 16:05:03	Update #17: Skipped: /site/assets/.htaccess (already exists)
+2026-06-04 16:05:03	Update #17: Skipped: /site/assets/cache/.htaccess (already exists)
+2026-06-04 16:05:03	Update #17: Skipped: /site/assets/backups/.htaccess (already exists)
+2026-06-04 16:05:03	Update #17: Skipped: /site/assets/logs/.htaccess (already exists)
+2026-06-04 16:05:03	Update #17: Created: /site/templates/.htaccess
+2026-06-04 16:05:03	Update #17: Skipped: /site/modules/.htaccess (already exists)
+2026-06-04 16:05:03	Update #17: Details: <a href='https://processwire.com/blog/posts/pw-3.0.135/' target='_blank'>https://processwire.com/blog/posts/pw-3.0.135/</a>
+2026-06-04 16:05:03	Update #17: Completed!
+2026-06-04 16:05:06	Update #18: Initializing update
+2026-06-04 16:05:06	Update #18: Completed!
+2026-06-04 16:05:06	Update #19: Initializing update
+2026-06-04 16:05:06	Update #19: Completed!
+2026-06-04 16:05:06	Update #20: Initializing update
+2026-06-04 16:05:06	Update #20: Updated 29 page(s) for correct created_users_id
+2026-06-04 16:05:06	Update #20: Completed!
+2026-06-04 16:05:20	Update #21: Initializing update
+2026-06-04 16:05:20	Update #21: Installed FileValidatorZip module
+2026-06-04 16:05:20	Update #21: Completed!

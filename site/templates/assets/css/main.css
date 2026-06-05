@@ -1,0 +1,292 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+a {
+  color: #0d6efd;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.25rem;
+}
+p {
+  line-height: 1.6;
+}
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.navbar-brand {
+  font-weight: 700;
+  color: #fff;
+}
+.navbar-brand:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+.nav-link {
+  color: rgba(255, 255, 255, 0.85);
+}
+.nav-link:hover {
+  color: #fff;
+}
+.nav-link.active {
+  color: #fff;
+  font-weight: 500;
+}
+footer {
+  margin-top: auto;
+}
+.listing-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.listing-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+.listing-card__badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 10;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.listing-card__badge--featured {
+  background: #ffc107;
+  color: #212529;
+}
+.listing-card__image {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #f8f9fa;
+}
+.listing-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.listing-card__image--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.listing-card__image--placeholder .placeholder-icon {
+  font-size: 2.5rem;
+  opacity: 0.3;
+}
+.listing-card__image a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.listing-card__image:hover img {
+  transform: scale(1.05);
+}
+.listing-card__body {
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.listing-card__category {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #0d6efd;
+  font-weight: 600;
+}
+.listing-card__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0.35rem 0 0.5rem;
+  line-height: 1.3;
+}
+.listing-card__title a {
+  color: #212529;
+  text-decoration: none;
+}
+.listing-card__title a:hover {
+  color: #0d6efd;
+}
+.listing-card__excerpt {
+  font-size: 0.875rem;
+  color: #6c757d;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.listing-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+}
+.listing-card__meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.listing-card__meta svg {
+  flex-shrink: 0;
+}
+.listing-card__price {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #198754;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+.listing-card__actions {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #dee2e6;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.listing-card__verified {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #198754;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  margin-right: auto;
+}
+.listing-card__verified svg {
+  flex-shrink: 0;
+}
+.listing-filters .form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.listing-hero {
+  padding: 3rem 0;
+}
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #212529;
+  background: #f8f9fa;
+}
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.breadcrumb-nav {
+  background: #f8f9fa;
+  padding: 0.75rem 0;
+  margin-bottom: 0;
+}
+.listing-page {
+  min-height: 100vh;
+}
+.listing-hero {
+  background: linear-gradient(135deg, #0d6efd 0%, #024dbc 100%);
+  color: #ffffff;
+}
+.listing-hero h1 {
+  font-weight: 700;
+}
+.listing-hero .form-label {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+.listing-hero .form-control,
+.listing-hero .form-select {
+  border: none;
+  padding: 0.5rem 1rem;
+}
+.listing-results {
+  background: #f8f9fa;
+}
+.listing-detail {
+  min-height: 100vh;
+}
+.listing-info__description-text {
+  line-height: 1.7;
+  color: #212529;
+}
+.listing-info__contact {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: none;
+  border-radius: 0.75rem;
+}
+.listing-features .listing-feature {
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+}
+.listing-gallery__main {
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+.listing-gallery__thumbs .img-thumbnail {
+  border-radius: 0.375rem;
+  transition: opacity 0.2s;
+}
+.listing-gallery__thumbs .img-thumbnail:hover {
+  opacity: 0.8;
+}
+.badge {
+  font-weight: 500;
+}
+.btn-success {
+  background-color: #198754;
+  border-color: #198754;
+}
+.btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: #ffffff;
+}
+@media (max-width: 991px) {
+  .listing-info__contact {
+    position: relative;
+    margin-top: 2rem;
+  }
+}

@@ -1,0 +1,195 @@
+<?php
+/**
+ * MigrationRunner Module
+ *
+ * Tracks which migrations have been executed in ProcessWire.
+ */
+
+class MigrationRunner extends WireData implements Module, ConfigurableModule {
+
+    /**
+     * Module info
+     */
+    public static function getModuleInfo() {
+        return [
+            'title' => 'Migration Runner',
+            'version' => '1.0.0',
+            'summary' => 'Tracks migration execution status',
+            'author' => 'Directorio',
+            'icon' => 'database',
+            'requires' => [],
+            'autoload' => false,
+            'singular' => true,
+        ];
+    }
+
+    /**
+     * Table name for migration tracking
+     */
+    const TABLE = 'migrations';
+
+    /**
+     * Install the module and create tracking table
+     */
+    public function ___install() {
+        $sql = <<<SQL
+        CREATE TABLE IF NOT EXISTS {self::TABLE} (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(255) NOT NULL UNIQUE,
+            executed_at DATETIME NOT NULL,
+            checksum VARCHAR(64) NOT NULL,
+            success TINYINT(1) NOT NULL DEFAULT 1,
+            error_message TEXT NULL,
+            INDEX idx_name (name),
+            INDEX idx_executed (executed_at)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+        SQL;
+
+        try {
+            $this->database->exec(str_replace('{self::TABLE}', self::TABLE, $sql));
+        } catch (\Exception $e) {
+            $this->error("Failed to create migrations table: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Uninstall - drop tracking table
+     */
+    public function ___uninstall() {
+        try {
+            $this->database->exec("DROP TABLE IF EXISTS " . self::TABLE);
+        } catch (\Exception $e) {
+            $this->error("Failed to drop migrations table: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Mark a migration as executed
+     */
+    public function markExecuted($name, $checksum, $success = true, $errorMessage = null) {
+        $executedAt = date('Y-m-d H:i:s');
+
+        $sql = "INSERT INTO " . self::TABLE . " (name, executed_at, checksum, success, error_message)
+                VALUES (:name, :executed_at, :checksum, :success, :error_message)
+                ON DUPLICATE KEY UPDATE
+                    executed_at = VALUES(executed_at),
+                    checksum = VALUES(checksum),
+                    success = VALUES(success),
+                    error_message = VALUES(error_message)";
+
+        $stmt = $this->database->prepare($sql);
+        $stmt->execute([
+            ':name' => $name,
+            ':executed_at' => $executedAt,
+            ':checksum' => $checksum,
+            ':success' => $success ? 1 : 0,
+            ':error_message' => $errorMessage,
+        ]);
+    }
+
+    /**
+     * Check if a migration has been executed
+     */
+    public function isExecuted($name) {
+        $sql = "SELECT COUNT(*) FROM " . self::TABLE . " WHERE name = :name AND success = 1";
+        $stmt = $this->database->prepare($sql);
+        $stmt->execute([':name' => $name]);
+        return (int) $stmt->fetchColumn() > 0;
+    }
+
+    /**
+     * Get executed migrations
+     */
+    public function getExecutedMigrations() {
+        $sql = "SELECT name, executed_at, checksum, success, error_message
+                FROM " . self::TABLE . "
+                ORDER BY executed_at ASC";
+        return $this->database->query($sql)->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Get pending migrations from directory
+     */
+    public function getPendingMigrations($migrationsDir) {
+        $executed = $this->database->query("SELECT name FROM " . self::TABLE)->fetchAll(\PDO::FETCH_COLUMN);
+        $executedNames = array_flip($executed);
+
+        $pending = [];
+        $files = glob($migrationsDir . '/*.php');
+
+        if ($files === false) return $pending;
+
+        foreach ($files as $file) {
+            $basename = basename($file, '.php');
+
+            // Skip special files
+            if (in_array($basename, ['index', 'bootstrap'])) continue;
+
+            if (!isset($executedNames[$basename])) {
+                $pending[] = [
+                    'name' => $basename,
+                    'file' => $file,
+                ];
+            }
+        }
+
+        sort($pending);
+        return $pending;
+    }
+
+    /**
+     * Get migration info from file header comment
+     */
+    public function getMigrationInfo($file) {
+        $content = file_get_contents($file);
+        $info = [
+            'version' => null,
+            'description' => null,
+            'depends' => [],
+        ];
+
+        if (preg_match('/^\s*\*\s*Migration:\s*(.+)$/m', $content, $matches)) {
+            $info['version'] = trim($matches[1]);
+        }
+
+        if (preg_match('/^\s*\*\s*Description:\s*(.+)$/m', $content, $matches)) {
+            $info['description'] = trim($matches[1]);
+        }
+
+        if (preg_match('/^\s*\*\s*Depends:\s*(.+)$/m', $content, $matches)) {
+            $deps = trim($matches[1]);
+            $info['depends'] = array_map('trim', explode(',', $deps));
+        }
+
+        return $info;
+    }
+
+    /**
+     * Calculate file checksum (excluding PHP opening tag and header comment)
+     */
+    public function calculateChecksum($file) {
+        $content = file_get_contents($file);
+
+        // Remove PHP opening tag and docblock comment
+        $content = preg_replace('/^<\?php\s*\/?>\s*/', '', $content);
+        $content = preg_replace('/^\/\*[\s\S]*?\*\/\s*/', '', $content);
+
+        return hash('sha256', $content);
+    }
+
+    /**
+     * Get module configuration
+     */
+    public function getModuleConfigInputfields(array $data) {
+        $fields = new InputfieldWrapper();
+
+        $field = $this->modules->get('InputfieldText');
+        $field->name = 'migrations_path';
+        $field->label = 'Migrations Directory';
+        $field->value = isset($data['migrations_path']) ? $data['migrations_path'] : 'site/migrations';
+        $field->collapsed = false;
+        $fields->add($field);
+
+        return $fields;
+    }
+}

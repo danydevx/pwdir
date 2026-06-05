@@ -1,0 +1,2 @@
+2026-06-04 14:51:32	admin	http://pwdir.local/admin/login/	Successful login for 'admin'
+2026-06-04 16:05:06	admin	http://pwdir.local/admin/login/	Successful login for 'admin'
